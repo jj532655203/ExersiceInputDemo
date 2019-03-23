@@ -19,9 +19,9 @@ import com.jay.exersiceinputdemo.OnSlideFrameListener;
  * desc:可手指滑动画出一个矩形框,并记录该框在本view的位置及尺寸
  */
 
-public class FingerSlideFrameView extends View {
+public class FingerDrawRectView extends View {
 
-    private static final String TAG = FingerSlideFrameView.class.getSimpleName();
+    private static final String TAG = FingerDrawRectView.class.getSimpleName();
     private static final int DRAW_INTERVAL = 9;
     private static final float CIRCLE_RADIO = 9;
     private PointF downPoint;
@@ -33,15 +33,15 @@ public class FingerSlideFrameView extends View {
     private Rect mParentRect;
     private OnSlideFrameListener mOnSlideFrameListener;
 
-    public FingerSlideFrameView(Context context) {
+    public FingerDrawRectView(Context context) {
         this(context, null);
     }
 
-    public FingerSlideFrameView(Context context, @Nullable AttributeSet attrs) {
+    public FingerDrawRectView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public FingerSlideFrameView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public FingerDrawRectView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initPaint();
     }
@@ -92,7 +92,9 @@ public class FingerSlideFrameView extends View {
     private void drawRect(PointF upPoint) {
         if (rect == null) {
             generateRect(downPoint, upPoint);
-        } else if (isInside4Circle) {
+        }
+        //拖动4个角的圆圈
+        else if (isInside4Circle) {
             if (indexOfInsideCircle < 0) {
                 Log.e(TAG, "ontouchEvent ACTION_DOWN逻辑异常");
             } else {
@@ -127,7 +129,9 @@ public class FingerSlideFrameView extends View {
                         break;
                 }
             }
-        } else if (isInsideRect) {
+        }
+        //拖动整个框
+        else if (isInsideRect) {
             int width = getWidth();
             int height = getHeight();
             float offSetX = upPoint.x - downPoint.x;
@@ -138,15 +142,15 @@ public class FingerSlideFrameView extends View {
                 upPoint.x = downPoint.x - rect.left;
             }
             //上移出界
-            else if (rect.top + offSetY < 0) {
+            if (rect.top + offSetY < 0) {
                 upPoint.y = downPoint.y - rect.top;
             }
             //右移出界
-            else if (rect.right + offSetX > width) {
+            if (rect.right + offSetX > width) {
                 upPoint.x = width + downPoint.x - rect.right;
             }
             //下移出界
-            else if (rect.bottom + offSetY > height) {
+            if (rect.bottom + offSetY > height) {
                 upPoint.y = height + downPoint.y - rect.bottom;
             }
 
