@@ -1,4 +1,4 @@
-package com.jay.exersiceinputdemo;
+package com.jay.exersiceinputdemo.bean;
 
 import android.graphics.Rect;
 

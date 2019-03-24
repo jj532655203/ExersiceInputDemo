@@ -1,4 +1,6 @@
-package com.jay.exersiceinputdemo;
+package com.jay.exersiceinputdemo.interf;
+
+import com.jay.exersiceinputdemo.bean.FingerDrawRectBean;
 
 import java.util.List;
 

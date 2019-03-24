@@ -25,17 +25,17 @@ import io.reactivex.functions.Consumer;
  * desc:获取题图(从文件浏览器导入)
  */
 
-public class ObtainExercisePicActivity extends AppCompatActivity {
+public class GetExercisePicActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_GET_CONTENT = 0;
     public static final int REQUEST_CODE_GET_EXERCISE_BEAN = 1;
     public static final String KEY_EXERCISE_BEAN = "KEY_EXERCISE_BEAN";
-    private static final String TAG = ObtainExercisePicActivity.class.getSimpleName();
+    private static final String TAG = GetExercisePicActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_obtain_exercise_pic);
+        setContentView(R.layout.activity_get_exercise_pic);
 
     }
 
@@ -52,7 +52,7 @@ public class ObtainExercisePicActivity extends AppCompatActivity {
                             intent.addCategory(Intent.CATEGORY_OPENABLE);
                             startActivityForResult(intent, REQUEST_CODE_GET_CONTENT);
                         } else {
-                            Toast.makeText(ObtainExercisePicActivity.this, "去写权限被拒绝,功能不可用", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(GetExercisePicActivity.this, "去写权限被拒绝,功能不可用", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -82,7 +82,7 @@ public class ObtainExercisePicActivity extends AppCompatActivity {
                 Toast.makeText(this, img_path, Toast.LENGTH_SHORT).show();
 
                 //打开Mainactivity录制输入框
-                Intent intent = new Intent(ObtainExercisePicActivity.this, MainActivity.class);
+                Intent intent = new Intent(GetExercisePicActivity.this, MainActivity.class);
                 intent.putExtra(MainActivity.PIC_FILE_PATH, img_path);
                 startActivityForResult(intent, REQUEST_CODE_GET_EXERCISE_BEAN);
                 break;

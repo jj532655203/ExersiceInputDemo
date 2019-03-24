@@ -1,7 +1,5 @@
 package com.jay.exersiceinputdemo.bean;
 
-import com.jay.exersiceinputdemo.FingerDrawRectBean;
-
 import java.io.Serializable;
 import java.util.List;
 

@@ -15,8 +15,8 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.jay.exersiceinputdemo.OnInputOkListener;
-import com.jay.exersiceinputdemo.OnInputResultListener;
+import com.jay.exersiceinputdemo.interf.OnInputOkListener;
+import com.jay.exersiceinputdemo.interf.OnAnswerOkListener;
 import com.jay.exersiceinputdemo.R;
 
 import java.io.File;
@@ -68,9 +68,9 @@ public class ExerciseInputView extends FrameLayout {
                 //弹出输入框:输入答案
                 InputAlertDialog inputAlertDialog = new InputAlertDialog();
                 inputAlertDialog.show(((AppCompatActivity) getContext()).getSupportFragmentManager(), InputAlertDialog.class.getSimpleName());
-                inputAlertDialog.setOnInputResultListener(new OnInputResultListener() {
+                inputAlertDialog.setOnInputResultListener(new OnAnswerOkListener() {
                     @Override
-                    public void onInputResult(String answer) {
+                    public void onAnswerOk(String answer) {
 
                         if (!TextUtils.isEmpty(answer)) {
 

@@ -8,15 +8,15 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.jay.exersiceinputdemo.FingerDrawRectBean;
-import com.jay.exersiceinputdemo.OnInputOkListener;
+import com.jay.exersiceinputdemo.bean.FingerDrawRectBean;
+import com.jay.exersiceinputdemo.interf.OnInputOkListener;
 import com.jay.exersiceinputdemo.R;
 import com.jay.exersiceinputdemo.bean.ExerciseBean;
 import com.jay.exersiceinputdemo.widget.ExerciseInputView;
 
 import java.util.List;
 
-import static com.jay.exersiceinputdemo.activity.ObtainExercisePicActivity.KEY_EXERCISE_BEAN;
+import static com.jay.exersiceinputdemo.activity.GetExercisePicActivity.KEY_EXERCISE_BEAN;
 
 /**
  * desc:默认:题图根布局的背景
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "toJson 字符串=" + toJson);
                 Intent data = new Intent();
                 data.putExtra(KEY_EXERCISE_BEAN, toJson);
-                MainActivity.this.setResult(ObtainExercisePicActivity.REQUEST_CODE_GET_EXERCISE_BEAN, data);
+                MainActivity.this.setResult(GetExercisePicActivity.REQUEST_CODE_GET_EXERCISE_BEAN, data);
             }
         });
     }

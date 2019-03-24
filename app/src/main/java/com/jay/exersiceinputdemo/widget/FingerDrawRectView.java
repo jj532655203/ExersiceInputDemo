@@ -12,7 +12,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.jay.exersiceinputdemo.FingerDrawRectBean;
+import com.jay.exersiceinputdemo.bean.FingerDrawRectBean;
 
 import java.util.ArrayList;
 import java.util.List;

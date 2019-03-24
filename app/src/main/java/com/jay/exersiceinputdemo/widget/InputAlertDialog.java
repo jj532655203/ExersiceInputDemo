@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.jay.exersiceinputdemo.OnInputResultListener;
+import com.jay.exersiceinputdemo.interf.OnAnswerOkListener;
 import com.jay.exersiceinputdemo.R;
 import com.jay.exersiceinputdemo.utils.DisplayUtil;
 
@@ -20,7 +20,7 @@ import com.jay.exersiceinputdemo.utils.DisplayUtil;
 
 public class InputAlertDialog extends DialogFragment {
 
-    private OnInputResultListener mListener;
+    private OnAnswerOkListener mListener;
     private EditText mContent;
     private Button mPositiveBtn, mNegativeBtn;
 
@@ -62,7 +62,7 @@ public class InputAlertDialog extends DialogFragment {
             @Override
             public void onClick(View v) {
                 if (mListener != null)
-                    mListener.onInputResult(mContent.getText().toString());
+                    mListener.onAnswerOk(mContent.getText().toString());
                 dismiss();
             }
         });
@@ -80,7 +80,7 @@ public class InputAlertDialog extends DialogFragment {
         mNegativeBtn = view.findViewById(R.id.negative_btn);
     }
 
-    public void setOnInputResultListener(OnInputResultListener listener) {
+    public void setOnInputResultListener(OnAnswerOkListener listener) {
         mListener = listener;
     }
 }
