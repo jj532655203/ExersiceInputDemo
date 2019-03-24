@@ -12,7 +12,11 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.jay.exersiceinputdemo.OnSlideFrameListener;
+import com.jay.exersiceinputdemo.FingerDrawRectBean;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Created by jj on 2019/3/23.
@@ -24,14 +28,13 @@ public class FingerDrawRectView extends View {
     private static final String TAG = FingerDrawRectView.class.getSimpleName();
     private static final int DRAW_INTERVAL = 9;
     private static final float CIRCLE_RADIO = 9;
+    private Paint paint = new Paint();
     private PointF downPoint;
     private int moveCount;
     private Rect rect;
-    private Paint paint = new Paint();
     private boolean isInside4Circle, isInsideRect;
     private int indexOfInsideCircle = -1;
-    private Rect mParentRect;
-    private OnSlideFrameListener mOnSlideFrameListener;
+    private List<FingerDrawRectBean> rectBeans = new ArrayList<>();
 
     public FingerDrawRectView(Context context) {
         this(context, null);
@@ -81,7 +84,6 @@ public class FingerDrawRectView extends View {
                 isInsideRect = false;
                 indexOfInsideCircle = -1;
 
-                mOnSlideFrameListener.onSlideFrameListener(downPoint, upPoint);
                 break;
             default:
                 break;
@@ -230,9 +232,44 @@ public class FingerDrawRectView extends View {
         canvas.drawCircle(rect.left, rect.bottom, CIRCLE_RADIO, paint);
         canvas.drawCircle(rect.right, rect.top, CIRCLE_RADIO, paint);
         canvas.drawCircle(rect.right, rect.bottom, CIRCLE_RADIO, paint);
+        for (FingerDrawRectBean bean  :rectBeans ) {
+            Rect _rect = bean.getRect();
+            canvas.drawRect(_rect,paint);
+            canvas.drawCircle(_rect.left, _rect.top, CIRCLE_RADIO, paint);
+            canvas.drawCircle(_rect.left, _rect.bottom, CIRCLE_RADIO, paint);
+            canvas.drawCircle(_rect.right, _rect.top, CIRCLE_RADIO, paint);
+            canvas.drawCircle(_rect.right, _rect.bottom, CIRCLE_RADIO, paint);
+            // TODO: 2019/3/25  绘制文字答案
+        }
     }
 
-    public void setOnSlideFrameListener(OnSlideFrameListener onSlideFrameListener) {
-        mOnSlideFrameListener = onSlideFrameListener;
+
+    public void generateCenterRect() {
+        if (rect != null)
+            return;
+        int width = getWidth();
+        int height = getHeight();
+        rect = new Rect(width / 2 - 150, height / 2 - 100, width / 2 + 150, height / 2 + 100);
+        invalidate();
+    }
+
+
+    private void reInit() {
+        downPoint = null;
+        moveCount = 0;
+        rect = null;
+        isInside4Circle = false;
+        isInsideRect = false;
+        indexOfInsideCircle = -1;
+    }
+
+    public void saveARectBean(String answer) {
+
+        rectBeans.add(new FingerDrawRectBean(rect, answer));
+        reInit();
+    }
+
+    public List<FingerDrawRectBean> getRectBeans() {
+        return rectBeans;
     }
 }
